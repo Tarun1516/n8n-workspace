@@ -3,22 +3,24 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
   },
   "postCreateCommand": "npm install -g n8n && mkdir -p ~/.n8n",
   "forwardPorts": [5678],
+  "portsAttributes": {
+    "5678": {
+      "label": "n8n",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-azuretools.vscode-docker"
       ]
     }
-  },
-  "remoteEnv": {
-    "N8N_HOST": "0.0.0.0",
-    "N8N_PORT": "5678",
-    "N8N_PROTOCOL": "https",
-    "WEBHOOK_URL": "${CODESPACE_NAME}-5678.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}",
-    "N8N_EDITOR_BASE_URL": "https://${CODESPACE_NAME}-5678.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
   }
 }
